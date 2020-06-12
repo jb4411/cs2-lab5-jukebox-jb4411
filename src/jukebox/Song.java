@@ -27,10 +27,10 @@ public class Song implements Comparable<Song> {
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
+        if (object == null || this.getClass() != object.getClass()) return false;
         Song song1 = (Song) object;
-        return artist.equals(song1.artist) &&
-                song.equals(song1.song);
+        return this.artist.equals(song1.artist) &&
+                this.song.equals(song1.song);
     }
 
     @Override
