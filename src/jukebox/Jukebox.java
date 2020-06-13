@@ -58,7 +58,7 @@ public class Jukebox {
                     if (this.mostPlayed == null) {
                         this.mostPlayed = currentSong;
                     } else {
-                        if (this.songs.get(this.mostPlayed) < this.songs.get(currentSong)) {
+                        if (this.songs.get(this.mostPlayed) <= this.songs.get(currentSong)) {
                             this.mostPlayed = currentSong;
                         }
                     }
