@@ -1,20 +1,20 @@
 package jukebox;
 
 /**
- * A class to represent a song. This class holds the songs artist as a string,
+ * A class to represent a song. This class holds the song's artist as a string,
  * as well as the name of the song, also as a string.
  *
  * @author Jesse Burdick-Pless jb4411@g.rit.edu
  */
 public class Song implements Comparable<Song> {
-    /** the songs artist */
+    /** the song's artist */
     private String artist;
     /** the name of the song */
     private String song;
 
     /**
      * Construct a new Song object.
-     * @param artist the songs artist
+     * @param artist the song's artist
      * @param song the name of the song
      */
     public Song(String artist, String song) {
@@ -23,8 +23,8 @@ public class Song implements Comparable<Song> {
     }
 
     /**
-     * Get the songs artist
-     * @return the songs artist
+     * Get the song's artist
+     * @return the song's artist
      */
     public String getArtist() {
         return artist;
@@ -39,7 +39,7 @@ public class Song implements Comparable<Song> {
     }
 
     /**
-     * The string representation of a song is: "Artist: {artist}, Song: {song}
+     * The string representation of a song is: "Artist: {artist}, Song: {song}"
      * @return the song string
      */
     @Override
@@ -48,7 +48,7 @@ public class Song implements Comparable<Song> {
     }
 
     /**
-     * Two songs are equal if they have the artist and same song.
+     * Two songs are equal if they have the same artist and same song name.
      * @param object the song to compare with
      * @return whether they are equal or not
      */
@@ -64,7 +64,7 @@ public class Song implements Comparable<Song> {
     /**
      * The hashcode of a song is the hashcode of the artist plus the hashcode
      * of the song name.
-     * @return the songs hashcode
+     * @return the song's hashcode
      */
     @Override
     public int hashCode() {
