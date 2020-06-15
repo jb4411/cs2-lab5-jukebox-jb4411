@@ -24,7 +24,7 @@ public class Jukebox {
         this.simulations = 0L;
         this.numSongsPlayed = 0L;
         this.mostPlayed = null;
-        this.songTree = new TreeSet<>((a,b) -> a.song.compareTo(b.song));
+        this.songTree = new TreeSet<>((a,b) -> a.getSong().compareTo(b.getSong()));
 
         while (in.hasNext()) {
             String[] line = in.nextLine().split("<SEP>", 4);
@@ -34,7 +34,7 @@ public class Jukebox {
             }
         }
         this.songList.addAll(this.songs.keySet());
-        //this.songTree.addAll(this.songs.keySet());
+        this.songs.put(mostPlayed, -1);
     }
 
     public long play() {
@@ -43,7 +43,7 @@ public class Jukebox {
             this.simulations += 1;
             this.songsPlayed = new HashSet<>();
             Song currentSong;
-            Boolean duplicate = false;
+            boolean duplicate = false;
             while (!duplicate) {
                 currentSong = this.songList.get(this.random.nextInt(this.songList.size()));
                 if (songsPlayed.contains(currentSong)) {
@@ -79,15 +79,15 @@ public class Jukebox {
         System.out.println("Number of simulations run: " + this.simulations);
         System.out.println("Total number of songs played: " + this.numSongsPlayed);
         System.out.println("Average number of songs played per simulation to get duplicate: " + (this.numSongsPlayed/this.simulations));
-        System.out.println("Most played song: \"" + this.mostPlayed.song + "\" by \"" + this.mostPlayed.artist + "\"");
-        System.out.println("All songs alphabetically by \"" + mostPlayed.artist + "\":");
+        System.out.println("Most played song: \"" + this.mostPlayed.getSong() + "\" by \"" + this.mostPlayed.getArtist() + "\"");
+        System.out.println("All songs alphabetically by \"" + mostPlayed.getArtist() + "\":");
         for (Song song : this.songList) {
-            if (song.artist.equals(this.mostPlayed.artist)) {
+            if (song.getArtist().equals(this.mostPlayed.getArtist())) {
                 this.songTree.add(song);
             }
         }
         for (Song song : this.songTree) {
-            System.out.println("        \"" + song.song + "\" with " + this.songs.get(song) + " plays");
+            System.out.println("        \"" + song.getSong() + "\" with " + this.songs.get(song) + " plays");
         }
 
     }
