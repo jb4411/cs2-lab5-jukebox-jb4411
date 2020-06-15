@@ -4,6 +4,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
+/**
+ * A class to represent a jukebox.
+ *
+ * @author Jesse Burdick-Pless jb4411@g.rit.edu
+ */
 public class Jukebox {
     HashMap<Song, Integer> songs;
     Random random;
