@@ -15,24 +15,24 @@ import java.util.*;
  * @author Jesse Burdick-Pless jb4411@g.rit.edu
  */
 public class Jukebox {
-    /** the collection of all songs currently in the jukebox */
-    HashMap<Song, Integer> songs;
+    /** the hashmap of all songs currently in the jukebox */
+    private HashMap<Song, Integer> songs;
     /** the random number generator used to pick songs */
-    Random random;
-    /** an list of songs that is used when picking random songs */
-    ArrayList<Song> songList;
+    private Random random;
+    /** a list of songs that is used when picking random songs */
+    private ArrayList<Song> songList;
     /** a set of songs that have already been played */
-    HashSet<Song> songsPlayed;
+    private HashSet<Song> songsPlayed;
     /** a list of the first five songs played */
-    ArrayList<Song> firstFiveSongs;
+    private ArrayList<Song> firstFiveSongs;
     /** the number of simulations run */
-    Long simulations;
+    private Long simulations;
     /** the number of songs played */
-    Long numSongsPlayed;
-    /** the m,ost played song */
-    Song mostPlayed;
+    private Long numSongsPlayed;
+    /** the most played song */
+    private Song mostPlayed;
     /** a tree of songs by the artist of the most popular song */
-    TreeSet<Song> songTree;
+    private TreeSet<Song> songTree;
 
     /**
      * Create the jukebox and initialize the values needed for the simulation.
@@ -52,6 +52,10 @@ public class Jukebox {
         this.simulations = 0L;
         this.numSongsPlayed = 0L;
         this.mostPlayed = null;
+        /**
+         * I used a lambda here instead of creating a new class to use as a
+         * comparator to sort the TreeSet alphabetically by song name.
+         */
         this.songTree = new TreeSet<>((a,b) -> a.getSong().compareTo(b.getSong()));
 
         while (in.hasNext()) {
@@ -133,14 +137,28 @@ public class Jukebox {
         System.out.println("Average number of songs played per simulation to get duplicate: " + (this.numSongsPlayed/this.simulations));
         System.out.println("Most played song: \"" + this.mostPlayed.getSong() + "\" by \"" + this.mostPlayed.getArtist() + "\"");
         System.out.println("All songs alphabetically by \"" + mostPlayed.getArtist() + "\":");
-        for (Song song : this.songList) {
-            if (song.getArtist().equals(this.mostPlayed.getArtist())) {
-                this.songTree.add(song);
-            }
-        }
-        for (Song song : this.songTree) {
-            System.out.println("        \"" + song.getSong() + "\" with " + this.songs.get(song) + " plays");
-        }
+
+        /**
+         * Here is the lambda I used to add all songs by the artist of the most
+         * popular song to a TreeSet, followed by the non-lambda implementation
+         * that I started with.
+         */
+        this.songList.forEach(song -> { if (song.getArtist().equals(this.mostPlayed.getArtist())) this.songTree.add(song); });
+//        for (Song song : this.songList) {
+//            if (song.getArtist().equals(this.mostPlayed.getArtist())) {
+//                this.songTree.add(song);
+//            }
+//        }
+
+        /**
+         * Here is the lambda I used to print all songs by the artist of the
+         * most popular song, followed by the non-lambda implementation that
+         * I started with.
+         */
+        this.songTree.forEach(song -> System.out.println("        \"" + song.getSong() + "\" with " + this.songs.get(song) + " plays"));
+//        for (Song song : this.songTree) {
+//            System.out.println("        \"" + song.getSong() + "\" with " + this.songs.get(song) + " plays");
+//        }
 
     }
 
