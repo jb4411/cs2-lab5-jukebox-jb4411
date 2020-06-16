@@ -5,7 +5,12 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 /**
- * A class to represent a jukebox.
+ * The main jukebox simulation class is run on the command line as:
+ * $ java Jukebox filename seed_#
+ *
+ * The filename is the name of the file containing the songs to be played by
+ * the jukebox simulation, the seed integer is used to seed the random number
+ * generator used when picking random songs.
  *
  * @author Jesse Burdick-Pless jb4411@g.rit.edu
  */
@@ -20,6 +25,15 @@ public class Jukebox {
     Song mostPlayed;
     TreeSet<Song> songTree;
 
+    /**
+     * Create the jukebox and initialize the values needed for the simulation.
+     * @param filename the name of the file containing the songs to be played
+     * by the jukebox simulation
+     * @param seed the integer used to seed the random number generator used
+     * when picking random songs
+     * @throws FileNotFoundException if the filename provided on the command
+     * line cannot be found
+     */
     public Jukebox(String filename, Integer seed) throws FileNotFoundException {
         Scanner in = new Scanner(new File(filename));
         this.random = new Random(seed);
@@ -42,6 +56,15 @@ public class Jukebox {
         this.songs.put(mostPlayed, -1);
     }
 
+    /**
+     * The jukebox runs 50000 simulations and keeps track of the first five
+     * songs played, the total time in seconds it takes to run the simulation,
+     * the total number of songs played throughout the entire simulation, the
+     * average number of songs played to get a duplicate, across the entire
+     * simulation and the song that was played the most.
+     *
+     * @return the total amount of time the simulation took to run in seconds
+     */
     public long play() {
         Long startTime = System.currentTimeMillis();
         for (int i = 0; i < 50000; i++) {
@@ -75,6 +98,21 @@ public class Jukebox {
         return (endTime - startTime)/1000;
     }
 
+    /**
+     * This method is used to display the statistics gained from playing the
+     * jukebox. The statistics displayed are as follows:
+     * the total number of songs in the jukebox, the first five songs that are
+     * played when the simulation is run, the total time in seconds it takes to
+     * run the simulation, the number of times the simulation is run, the total
+     * number of songs played throughout the entire simulation, the average
+     * number of songs played to get a duplicate, across the entire simulation
+     * the song that was played the most, and finally for the song that was
+     * played the most, a list of all the songs by that song's artist that are
+     * in the jukebox is displayed, alphabetically by song name along with the
+     * total number of times each song was played.
+     *
+     * @param time the total amount of time the simulation took to run in seconds
+     */
     public void display(long time) {
         System.out.println("Printing first 5 songs played...");
         for (Song song : this.firstFiveSongs) {
@@ -96,6 +134,18 @@ public class Jukebox {
         }
 
     }
+
+    /**
+     * The main method expects there to be three command line arguments:
+     * 1: The filename is the name of the file containing the songs to be
+     * played by the jukebox simulation
+     * 2: the seed integer used to seed the random number generator used when
+     * picking random songs
+     *
+     * @param args command line arguments
+     * @throws FileNotFoundException if the filename provided on the command
+     * line cannot be found
+     */
     public static void main(String[] args) throws FileNotFoundException {
         if (args.length != 2) {
             System.out.println("Usage: java Jukebox filename seed");
