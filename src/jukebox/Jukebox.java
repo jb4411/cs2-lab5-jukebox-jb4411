@@ -128,9 +128,16 @@ public class Jukebox {
      */
     public void display(long time) {
         System.out.println("Printing first 5 songs played...");
-        for (Song song : this.firstFiveSongs) {
-            System.out.println("        " + song.toString());
-        }
+
+        /**
+         * Here is the lambda I used to print the first five songs played when
+         * the simulation is run, followed by the non-lambda implementation
+         * that I started with.
+         */
+        this.firstFiveSongs.forEach(song -> System.out.println("        " + song.toString()));
+//        for (Song song : this.firstFiveSongs) {
+//            System.out.println("        " + song.toString());
+//        }
         System.out.println("Simulation took " + time +" second/s");
         System.out.println("Number of simulations run: " + this.simulations);
         System.out.println("Total number of songs played: " + this.numSongsPlayed);
