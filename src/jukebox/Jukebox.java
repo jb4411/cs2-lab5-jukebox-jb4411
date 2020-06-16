@@ -9,20 +9,29 @@ import java.util.*;
  * $ java Jukebox filename seed_#
  *
  * The filename is the name of the file containing the songs to be played by
- * the jukebox simulation, the seed integer is used to seed the random number
+ * the jukebox simulation. The seed integer is used to seed the random number
  * generator used when picking random songs.
  *
  * @author Jesse Burdick-Pless jb4411@g.rit.edu
  */
 public class Jukebox {
+    /** the collection of all songs currently in the jukebox */
     HashMap<Song, Integer> songs;
+    /** the random number generator used to pick songs */
     Random random;
+    /** an list of songs that is used when picking random songs */
     ArrayList<Song> songList;
+    /** a set of songs that have already been played */
     HashSet<Song> songsPlayed;
+    /** a list of the first five songs played */
     ArrayList<Song> firstFiveSongs;
+    /** the number of simulations run */
     Long simulations;
+    /** the number of songs played */
     Long numSongsPlayed;
+    /** the m,ost played song */
     Song mostPlayed;
+    /** a tree of songs by the artist of the most popular song */
     TreeSet<Song> songTree;
 
     /**
@@ -57,10 +66,10 @@ public class Jukebox {
     }
 
     /**
-     * The jukebox runs 50000 simulations and keeps track of the first five
+     * The jukebox runs 50,000 simulations and keeps track of the first five
      * songs played, the total time in seconds it takes to run the simulation,
      * the total number of songs played throughout the entire simulation, the
-     * average number of songs played to get a duplicate, across the entire
+     * average number of songs played to get a duplicate across the entire
      * simulation and the song that was played the most.
      *
      * @return the total amount of time the simulation took to run in seconds
@@ -105,10 +114,10 @@ public class Jukebox {
      * played when the simulation is run, the total time in seconds it takes to
      * run the simulation, the number of times the simulation is run, the total
      * number of songs played throughout the entire simulation, the average
-     * number of songs played to get a duplicate, across the entire simulation
-     * the song that was played the most, and finally for the song that was
+     * number of songs played to get a duplicate across the entire simulation, and
+     * the song that was played the most. Finally for the song that was
      * played the most, a list of all the songs by that song's artist that are
-     * in the jukebox is displayed, alphabetically by song name along with the
+     * in the jukebox is displayed alphabetically by song name along with the
      * total number of times each song was played.
      *
      * @param time the total amount of time the simulation took to run in seconds
@@ -136,7 +145,7 @@ public class Jukebox {
     }
 
     /**
-     * The main method expects there to be three command line arguments:
+     * The main method expects there to be two command line arguments:
      * 1: The filename is the name of the file containing the songs to be
      * played by the jukebox simulation
      * 2: the seed integer used to seed the random number generator used when
